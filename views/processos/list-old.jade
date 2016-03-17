@@ -1,0 +1,25 @@
+extends ../base.jade
+
+block content
+  h3 Processos
+
+  a(href="/processos/novo", class='btn btn-success btn-sm')
+    i.glyphicon.glyphicon-plus
+    span  Novo processo
+
+  each processo in processos
+    .media
+      a(href="/processos/#{processo.id}")
+        .media-body
+          h4= processo.title
+          p= processo.author
+            span= processo.cliente
+
+  if !processos.length
+    p Nenhum processo encontrado.
+
+  if nextPageToken
+    nav
+      ul.pager
+        li
+          a(href="?pageToken=#{encodeURIComponent(nextPageToken)}") Mais

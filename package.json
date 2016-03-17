@@ -1,0 +1,37 @@
+{
+  "name": "llm-node",
+  "version": "1.0.0",
+  "description": "Legal Lawyer Manager - Node Base",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RenatoXSR/llm-node.git"
+  },
+  "keywords": [
+    "llm",
+    "node",
+    "mean",
+    "express",
+    "mongodb",
+    "angular",
+    "legal",
+    "lawyer",
+    "manager"
+  ],
+  "author": "RenatoXSR (Alpha Sagittarii Empreendimentos e Participações EIRELI)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/RenatoXSR/llm-node/issues"
+  },
+  "homepage": "https://github.com/RenatoXSR/llm-node#readme",
+  "dependencies": {
+    "body-parser": "^1.15.0",
+    "express": "^4.13.4",
+    "jade": "^1.11.0",
+    "mongodb": "^2.1.8",
+    "mongoose": "^4.4.7"
+  }
+}

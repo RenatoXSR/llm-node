@@ -1,0 +1,42 @@
+doctype html
+html(lang="pt-br")
+  head
+    title [LLM] Legal Lawyer Manager [Node.js base]
+    meta(charset='utf-8')
+    meta(name="viewport", content="width=device-width, initial-scale=1")
+    block scripts
+      script(src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js")
+      script(src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js")
+      link(rel="stylesheet", href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css")
+  body
+    header
+    nav
+      .navbar.navbar-default
+        .container
+          .navbar-header
+            .navbar-brand [LLM] Legal Lawyer Manager
+
+          ul.nav.navbar-nav
+            li
+              a(href="/processos") Processos
+          p.navbar-text.navbar-right
+            | Acesse o sistema 
+            a(href="http://www.silveirarosa.com") [Advocacia Silveira Rosa]
+            | .
+
+    main
+      #wrap(style="min-height: 100%;height: auto !important;height: 100%;margin: 0 auto 60px;}")
+        .container#wrap
+          block content
+    footer.container-fluid.text-center
+      #footer.container(style="background-color:#eee;height:120px;width:100%;padding-left:20px;padding-right:20px;")
+          br
+          br
+          p 2016 © Advocacia Silveira Rosa. Todos os direitos reservados.
+          p Desenvolvido por Renato Rosa e Alpha Sagittarii Empreendimentos e Participações, em Barueri/SP.
+          script
+            | $(function(
+            block footer-jquery
+            | ))
+            
+    
