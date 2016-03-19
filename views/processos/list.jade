@@ -1,0 +1,88 @@
+extends ../base.jade
+
+block content
+  h3 Processos
+
+  .form-group.row
+    .col-sm-2
+      a(href="/processos/novo", class='btn btn-success btn-sm')
+        i.glyphicon.glyphicon-plus
+        span  Novo processo
+    .col-sm-offset-8
+      p.form-group-text Resultados por página&#58;&nbsp;
+        a(href="?perPage=10") 10
+        | &nbsp;&verbar;&nbsp;
+        a(href="?perPage=20") 20
+        | &nbsp;&verbar;&nbsp;
+        a(href="?perPage=50") 50
+        | &nbsp;&verbar;&nbsp;
+        a(href="?perPage=100") 100
+        | &nbsp;&verbar;&nbsp;
+        a(href="?perPage=200") 200
+        | &nbsp;&verbar;&nbsp;
+        a(href="?perPage=500") 500
+        | &nbsp;&verbar;&nbsp;
+        a(href="?perPage=1000") 1000
+
+  .table-responsive
+    table.table.table-striped.table-condensed(border='1')
+      thead
+        tr
+          th #
+          th Acompanhamento (link)
+          th Processo n.º (clique para editar)
+          th Cliente
+          th Parte Cliente
+          th Parte Contrária
+          th Adv.
+          th Resp.
+          th Foro
+          th Vara
+          th Fase
+          th Observações
+      tbody
+        each processo, i in processos
+            tr
+              td 
+                span
+                  #{i+nextPageToken+1-processos.length}
+              td
+                | #{processo.acomp}
+                | &nbsp;(
+                a(href="#{processo.link}", target="_blank") Abrir link
+                | )
+              if(!processo.numero)
+                td
+                  a(href="/processos/#{processo.id}") Abrir/Editar
+              td 
+                a(href="/processos/#{processo.id}") #{processo.numero}
+              td= processo.cliente
+              td= processo.parteCliente
+              td= processo.parteContraria
+              td= processo.advogado
+              td= processo.responsavel
+              td
+                | #{processo.comarca}
+                | /
+                | #{processo.estado}
+                | &nbsp;(
+                | #{processo.instancia}
+                | )
+              td
+                | #{processo.numVara}
+                | &nbsp;
+                | #{processo.natVara}
+              td
+                | #{processo.fase}
+                | /
+                | #{processo.status}
+              td= processo.observacoes
+                
+  if !processos.length
+    p Nenhum processo encontrado.
+
+  if nextPageToken
+    nav
+      ul.pager
+        li
+          a(href="?pageToken=#{encodeURIComponent(nextPageToken)}&perPage=#{encodeURIComponent(perPage)}") Mais
