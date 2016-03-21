@@ -1,4 +1,14 @@
+#############
+## ignore config-file
+##
+## see instructions in config-template.js
+################
 config.js
+.mongorc.js
+
+#########
+## Eclipse
+#########
 
 .metadata
 bin/
