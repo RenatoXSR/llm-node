@@ -4,7 +4,10 @@
 ## see instructions in config-template.js
 ################
 config.js
+<<<<<<< HEAD
 .mongorc.js
+=======
+>>>>>>> 9f5f9fb683f50f27f8073e9949d46606172f9788
 
 #########
 ## Eclipse
@@ -65,7 +68,10 @@ local.properties
 ##  NetBeans
 #################
 nbproject/private/
+<<<<<<< HEAD
 nbproject/private/*
+=======
+>>>>>>> 9f5f9fb683f50f27f8073e9949d46606172f9788
 build/
 nbbuild/
 dist/
@@ -111,4 +117,8 @@ jspm_packages
 .npm
 
 # Optional REPL history
+<<<<<<< HEAD
 .node_repl_history
+=======
+.node_repl_history
+>>>>>>> 9f5f9fb683f50f27f8073e9949d46606172f9788
