@@ -4,10 +4,11 @@
 ## see instructions in config-template.js
 ################
 config.js
-<<<<<<< HEAD
+gitkit-server-secret.json
+gitkit-server-config.json
 .mongorc.js
-=======
->>>>>>> 9f5f9fb683f50f27f8073e9949d46606172f9788
+
+
 
 #########
 ## Eclipse

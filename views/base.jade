@@ -11,17 +11,7 @@ html(lang="pt-br")
       <!-- Copy and paste here the Client configuration from Developer Console into the config variable -->
       script(src="//www.gstatic.com/authtoolkit/js/gitkit.js")
       link(rel="stylesheet", href="//www.gstatic.com/authtoolkit/css/gitkit.css")
-      script
-            var gitkitUserConfig = {
-                "widgetUrl": "http://llm-silvrosa.appspot.com/gitkit",
-                "signInSuccessUrl": "http://llm-silvrosa.appspot.com/gitkit",
-                "signOutUrl": "http://llm-silvrosa.appspot.com/",
-                "oobActionUrl": "http://llm-silvrosa.appspot.com/send",
-                "apiKey": "",
-                "siteName": "this site",
-                "signInOptions": ["password","microsoft","google","facebook","twitter"]
-            };
-            window.google.identitytoolkit.start('#gitkitWidgetDiv',gitkitUserConfig,decodeURIComponent('%%postBody%%'));
+      script var gitkitUserConfig = {              "widgetUrl": "http://llm-silvrosa.appspot.com/gitkit",                "signInSuccessUrl": "http://llm-silvrosa.appspot.com/gitkit",                "signOutUrl": "http://llm-silvrosa.appspot.com/",                "oobActionUrl": "http://llm-silvrosa.appspot.com/send",                "apiKey": "",                "siteName": "this site",                "signInOptions": ["password","microsoft","google","facebook","twitter"]            };            window.google.identitytoolkit.start('#gitkitWidgetDiv',gitkitUserConfig,decodeURIComponent('%%postBody%%'));
   body
     header
     nav
