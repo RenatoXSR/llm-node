@@ -3,24 +3,48 @@ html(lang="pt-br")
   head
     title [LLM] Legal Lawyer Manager [Node.js base]
     meta(charset='utf-8')
+    meta(http-equiv="X-UA-Compatible", content="IE=edge")
     meta(name="viewport", content="width=device-width, initial-scale=1")
     block scripts
         script(src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js")
         script(src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js")
-        link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css")
-        link(rel="stylesheet", href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css")
+        script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js")
+        link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css")
+        link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css")
+        link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css")
   body
     header
     nav
       .navbar.navbar-default
         .container
           .navbar-header
-            .navbar-brand [LLM] Legal Lawyer Manager
-
+            .navbar-brand
+                span.glyphicon.glyphicon-cloud
+                | &nbsp;[LLM] Legal Lawyer Manager
           ul.nav.navbar-nav
             li
-              a(href="/processos") Processos
-          p.navbar-text.navbar-right
+              a(href="/")
+                span.glyphicon.glyphicon-home
+            li
+              a(href="/processos")
+                span.glyphicon.glyphicon-th-list
+                | &nbsp;Processos
+            li
+              a(href="/clientes")
+                span.glyphicon.glyphicon-briefcase
+                | &nbsp;Clientes
+            li
+              a(href="/partes")
+                span.glyphicon.glyphicon-pencil
+                | &nbsp;Partes
+            li
+              a(href="/usuarios")
+                span.fa.fa-users
+                | &nbsp;Usuários
+            li
+              a(href="/categorias")
+                span.glyphicon.glyphicon-cog
+            p.navbar-text.navbar-right
             | Acesse o sistema 
             a(href="http://www.silveirarosa.com") [Advocacia Silveira Rosa]
             | .&nbsp;

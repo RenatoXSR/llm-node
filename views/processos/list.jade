@@ -48,9 +48,10 @@ block content
                   #{i+nextPageToken+1-processos.length}
               td
                 | #{processo.acomp}
-                | &nbsp;(
-                a(href="#{processo.link}", target="_blank") Abrir link
-                | )
+                if processo.link
+                  | &nbsp;(
+                  a(href="#{processo.link}", target="_blank") Abrir link
+                  | )
               if(!processo.numero)
                 td
                   a(href="/processos/#{processo.id}") Abrir/Editar

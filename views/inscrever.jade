@@ -4,20 +4,20 @@ block content
 	.col-sm-6.col-sm-offset-3
 		h1
 			span.fa.fa-sign-in
-			| &nbsp;Login
+			| &nbsp;Inscreva-se!
 		if (message.length > 0)
 			div.alert.alert-danger #{message}
-		form(action="/login", method="post")
+		form(action="/inscrever", method="post")
 			div.form-group
 				label.form-control-label(for="email") Email
 				input.form-control(type="text", name="email",id="email")
 			div.form-group
 				label.form-control-label(for="password") Senha
 				input.form-control(type="password", name="password",id="password")
-			button.btn.btn-warning.btn-lg(type="submit") Login
+			button.btn.btn-warning.btn-lg(type="submit") Inscrever-se
 		hr
-		p Não tem uma conta ainda?
-			a(href="/inscrever") Inscreva-se
+		p Já tem uma conta? 
+			a(href="/login") Registre-se (Login)
 			| .
 		p Ou então volte para a 
 			a(href="/") Página de entrada

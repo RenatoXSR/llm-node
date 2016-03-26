@@ -23,7 +23,7 @@ module.exports = function (model) {
 			return next();
 
 		// if they aren't redirect them to the home page
-		res.render('index');
+		res.render('login');
 	});
 
   /**

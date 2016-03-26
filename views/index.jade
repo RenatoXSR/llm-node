@@ -4,7 +4,7 @@ block content
 	.jumbotron.text-center
 		h1
 			span.fa.fa-lock
-			| &nbsp;Autenticação no Servidor node.js
+			| &nbsp;Acesso restrito
 		p Faça login ou se registre com os seguintes serviços:
 		a.btn.btn-default(href='/login')
 			span.fa.fa-user
@@ -12,3 +12,15 @@ block content
 		a.btn.btn-default(href='/signup')
 			span.fa.fa-user
 			| &nbsp;Registro Local
+		a.btn.btn-primary(href="/auth/facebook")
+			span.fa.fa-facebook
+			| &nbsp;Facebook
+		a.btn.btn-info(href="/auth/twitter")
+			span.fa.fa-twitter
+			| &nbsp;Twitter
+		a.btn.btn-danger(href="/auth/google")
+			span.fa.fa-google-plus
+			| &nbsp;Google+
+		a.btn.btn-info(href="/auth/linkedin")
+			span.fa.fa-linkedin
+			| &nbsp;LinkedIn
