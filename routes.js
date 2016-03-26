@@ -2,11 +2,18 @@
 
 module.exports = function(app, passport) {
 
+	// ========================
+	// Router content type
+	app.use(function (req, res, next){
+		res.set('Content-Type', 'text/html');
+		next();
+	});
+  
     // =====================================
     // HOME PAGE (with login links) ========
     // =====================================
     app.get('/', function(req, res) {
-        res.render('index.ejs'); // load the index.ejs file
+        res.render('index'); // load the index.jade file
     });
 	
     // =====================================
@@ -16,7 +23,7 @@ module.exports = function(app, passport) {
     app.get('/login', function(req, res) {
 
         // render the page and pass in any flash data if it exists
-        res.render('login.ejs', { message: req.flash('loginMessage') }); 
+        res.render('login', { message: req.flash('loginMessage') }); 
     });
 
     // process the login form

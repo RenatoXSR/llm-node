@@ -1,0 +1,13 @@
+extends ./base.jade
+
+block content
+	.col-sm-6.col-sm-offset-3
+		h1
+			span.fa.fa-sign
+			| &nbsp;Login
+		if (message.length > 0)
+			div.alert.alert-danger #{message}
+		form(action="/login", method="post")
+			div.form-group
+				label.form-control-label(for="email") Email
+				input.form-control(type="text", name="email",id="email")

@@ -14,12 +14,12 @@ var cookieParser = require('cookie-parser');
 var bodyParser   = require('body-parser');
 var session      = require('express-session');
 
-var configDB = require('./config/database.js');
-
 // configuration ========================================
-mongoose.connect(configDB.url); // connect to our database
+console.log(mongoose.connect(config.mongodb.url)); // connect to our database
 
 // require('./config/passport')(passport); // pass passport for configuration
+
+var app = express();
 
 // set up our express application
 app.use(morgan('dev')); // log every request to the console
@@ -37,7 +37,7 @@ app.use(flash()); // use connect-flash for flash messages stored in session
 
 //==============================
 // Resume normal app routines
-var app = express();
+
 
 app.disable('etag');
 app.set('views', path.join(__dirname, 'views'));

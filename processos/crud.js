@@ -5,16 +5,26 @@ var bodyParser = require('body-parser');
 
 module.exports = function (model) {
 
-  var router = express.Router();
+	var router = express.Router();
 
-  // Automatically parse request body as form data
-  router.use(bodyParser.urlencoded({ extended: false }));
+	// Automatically parse request body as form data
+	router.use(bodyParser.urlencoded({ extended: false }));
 
-  // Set Content-Type for all responses for these routes
-  router.use(function (req, res, next){
-    res.set('Content-Type', 'text/html');
-    next();
-  });
+	// Set Content-Type for all responses for these routes
+	router.use(function (req, res, next){
+		res.set('Content-Type', 'text/html');
+		next();
+	});
+  
+	router.use(function isLoggedIn(req, res, next) {
+
+		// if user is authenticated in the session, carry on 
+		if (req.isAuthenticated())
+			return next();
+
+		// if they aren't redirect them to the home page
+		res.render('index');
+	});
 
   /**
    * GET /processos/
