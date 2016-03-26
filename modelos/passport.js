@@ -5,13 +5,13 @@ var LocalStrategy   = require('passport-local').Strategy;
 var FacebookStrategy = require('passport-facebook').Strategy;
 var TwitterStrategy  = require('passport-twitter').Strategy;
 var GoogleStrategy   = require('passport-google-oauth').OAuth2Strategy;
-var LinkedInStrategy   = require('passport-linkedin').OAuthStrategy;
+var LinkedInStrategy   = require('passport-linkedin').Strategy;
 
 
 // load up the user model
 var User            = require('./user');
-var configAuth 		= require('../config');
-
+var configAuth 		= require('../config')();
+console.log(configAuth);
 // expose this function to our app using module.exports
 module.exports = function(passport) {
 
