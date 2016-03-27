@@ -11,7 +11,7 @@ var LinkedInStrategy   = require('passport-linkedin').Strategy;
 // load up the user model
 var User            = require('./user');
 var configAuth 		= require('../config')();
-console.log(configAuth);
+
 // expose this function to our app using module.exports
 module.exports = function(passport) {
 
@@ -151,7 +151,13 @@ module.exports = function(passport) {
                         if (!user.linkedin.token) {
                             user.linkedin.token = token;
                             user.linkedin.name  = profile.displayName;
-                            user.linkedin.email = profile.emails[0].value;
+                            if(profile.emails > 0){
+								user.linkedin.email = profile.emails[0].value;
+							} else if (profile.email > 0) {
+								user.linkedin.email = profile.email;
+							} else if (profile.emailAddress > 0) {
+								user.linkedin.email = profile.emailAddress;
+							}
 
                             user.save(function(err) {
                                 if (err)
@@ -167,8 +173,13 @@ module.exports = function(passport) {
                         newUser.linkedin.id    = profile.id;
                         newUser.linkedin.token = token;
                         newUser.linkedin.name  = profile.displayName;
-                        newUser.linkedin.email = profile.emails[0].value;
-
+                        if(profile.emails > 0){
+							newUser.linkedin.email = profile.emails[0].value;
+						} else if (profile.email > 0) {
+							user.linkedin.email = profile.email;
+						} else if (profile.emailAddress > 0) {
+							user.linkedin.email = profile.emailAddress;
+						}
                         newUser.save(function(err) {
                             if (err)
                                 throw err;
@@ -184,8 +195,13 @@ module.exports = function(passport) {
                 user.linkedin.id    = profile.id;
                 user.linkedin.token = token;
                 user.linkedin.name  = profile.displayName;
-                user.linkedin.email = profile.emails[0].value; // pull the first email
-
+                if(profile.emails > 0){
+					user.linkedin.email = profile.emails[0].value; // pull the first email
+				} else if (profile.email > 0) {
+					user.linkedin.email = profile.email;
+				} else if (profile.emailAddress > 0) {
+					user.linkedin.email = profile.emailAddress;
+				}
                 user.save(function(err) {
                     if (err)
                         throw err;

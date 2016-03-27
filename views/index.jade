@@ -6,21 +6,28 @@ block content
 			span.fa.fa-lock
 			| &nbsp;Acesso restrito
 		p Faça login ou se registre com os seguintes serviços:
-		a.btn.btn-default(href='/login')
-			span.fa.fa-user
-			| &nbsp;Login Local
-		a.btn.btn-default(href='/signup')
-			span.fa.fa-user
-			| &nbsp;Registro Local
-		a.btn.btn-primary(href="/auth/facebook")
-			span.fa.fa-facebook
-			| &nbsp;Facebook
-		a.btn.btn-info(href="/auth/twitter")
-			span.fa.fa-twitter
-			| &nbsp;Twitter
-		a.btn.btn-danger(href="/auth/google")
-			span.fa.fa-google-plus
-			| &nbsp;Google+
-		a.btn.btn-info(href="/auth/linkedin")
-			span.fa.fa-linkedin
-			| &nbsp;LinkedIn
+		.row 
+			.col-xs-12.col-sm-2
+				a.btn.btn-default(href='/login', style="width: 100%")
+					span.fa.fa-user
+					| &nbsp;Login Local
+			.col-xs-12.col-sm-2
+				a.btn.btn-default(href='/signup', style="width: 100%")
+					span.fa.fa-user
+					| &nbsp;Registro Local
+			.col-xs-12.col-sm-2
+				a.btn.btn-primary(href="/auth/facebook", style="width: 100%")
+					span.fa.fa-facebook
+					| &nbsp;Facebook
+			.col-xs-12.col-sm-2
+				a.btn.btn-info(href="/auth/twitter", style="width: 100%")
+					span.fa.fa-twitter
+					| &nbsp;Twitter
+			.col-xs-12.col-sm-2
+				a.btn.btn-danger(href="/auth/google", style="width: 100%")
+					span.fa.fa-google-plus
+					| &nbsp;Google+
+			.col-xs-12.col-sm-2
+				a.btn.btn-primary(href="/auth/linkedin", style="width: 100%")
+					span.fa.fa-linkedin
+					| &nbsp;LinkedIn

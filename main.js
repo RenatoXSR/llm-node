@@ -15,7 +15,11 @@ var bodyParser   = require('body-parser');
 var session      = require('express-session');
 
 // configuration ========================================
-mongoose.connect(config.mongodb.url); // connect to our database
+mongoose.connect(config.mongodb.url, function connectionError(error){console.error(error);}); // connect to our database
+mongoose.connection.on('error', function dbConnectionError(err, req, res, next){
+  console.error(err);
+  res.status(500).send(err.response || 'DB Connection Error!');
+});
 
 require('./modelos/passport')(passport); // pass passport for configuration
 
