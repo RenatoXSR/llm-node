@@ -12,7 +12,7 @@ block content
 				h3
 					span.fa.fa-user
 					| &nbsp; Local
-				if user.local.email {
+				if user.local.email
 					p
 						strong id
 						| : #{user._id}
@@ -23,9 +23,8 @@ block content
 						strong Senha
 						| : #{user.local.password}
 					a.btn.btn-default(href="/unlink/local") Desconectar
-				} else {
+				else
 					a.btn.btn-default(href="/connect/local") Conectar conta local
-				}
 		.col-sm-6
 			.well
 				h3.text-primary

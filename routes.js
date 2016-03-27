@@ -177,6 +177,19 @@ module.exports = function(app, passport) {
 		}));
 			
 			
+    // linkedin ---------------------------------
+
+	// send to linkedin to do the authentication
+	app.get('/connect/linkedin', passport.authorize('linkedin', { scope :  ['r_basicprofile', 'r_emailaddress']  }));
+
+	// the callback after google has authorized the user
+	app.get('/connect/linkedin/callback',
+		passport.authorize('linkedin', {
+			successRedirect : '/perfil',
+			failureRedirect : '/'
+		}));
+			
+			
 	
 	// =============================================================================
 	// UNLINK ACCOUNTS =============================================================
@@ -222,6 +235,15 @@ module.exports = function(app, passport) {
         });
     });
 
+
+    // linkedin ---------------------------------
+    app.get('/unlink/linkedin', function(req, res) {
+        var user          = req.user;
+        user.linkedin.token = undefined;
+        user.save(function(err) {
+           res.redirect('/perfil');
+        });
+    });
 };
 
 // route middleware to make sure a user is logged in
