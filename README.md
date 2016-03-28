@@ -1,6 +1,8 @@
 # llm-node
 Legal Lawyer Manager - Node base
 
+_Requires Node.js_
+
 # Installation instructions
 1. download repository
 2. rename _config-template.js_ to _config.js_ and change accordingly, to setup your MongoDB user, password, collection and URL, and to insert your OAuth keys (such as Facebook, Twitter, Google+ and LinkedIn)
