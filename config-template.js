@@ -26,7 +26,7 @@ var getConfig = module.exports = function () {
       collection: process.env.MONGO_COLLECTION || 'processos'
     },
 	
-		
+	
 	'facebookAuth' : {
         'clientID'      : 'your-secret-clientID-here', // your App ID
         'clientSecret'  : 'your-client-secret-here', // your App Secret
@@ -45,8 +45,8 @@ var getConfig = module.exports = function () {
         'callbackURL'   : 'http://localhost:8080/auth/google/callback'
     },
 	'linkedinAuth' : {
-        'clientID'      : 'your-secret-clientID-here',
-        'clientSecret'  : 'your-client-secret-here',
+        'consumerKey'      : 'your-secret-clientID-here',
+        'consumerSecret'  : 'your-client-secret-here',
         'callbackURL'   : 'http://localhost:8080/auth/linkedin/callback'
     }
 
