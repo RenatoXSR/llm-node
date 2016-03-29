@@ -38,7 +38,7 @@ block content
     .btn-group
       a(href="/processos/#{processo.id}/novo-andamento", class='btn btn-primary btn-sm')
         i.glyphicon.glyphicon-plus
-          span  Novo andamento
+        span  Novo andamento
   else
     .table-responsive
       table.table.table-striped.table-condensed(border='1')
@@ -79,4 +79,4 @@ block content
     nav
       ul.pager
         li
-          a(href="?pageToken=#{encodeURIComponent(nextPageToken)}") Mais
+          a(href="?pageToken=#{encodeURIComponent(nextPageToken)}", class="btn btn-primary btn-sm") Mais
