@@ -1,3 +1,7 @@
+// =====================
+// # /main.js
+//
+
 'use strict';
 
 var path = require('path');
@@ -50,12 +54,20 @@ app.set('trust proxy', true);
 //app.configure('development', function () { app.locals.pretty = true; });
 
 
-// Processos
+// Processos ================
 var processosModelo = require('./processos/processosModelo')(config);
 app.use('/processos', require('./processos/crud')(processosModelo));
 app.use('/api/processos', require('./processos/api')(processosModelo));
-//var classesProcessuais = require('./processos/classesProcessuais');
-//console.log(classesProcessuais);
+
+
+// Categorias ================
+var categoriasModelo = require('./categorias/model-mongodb')(config.mongodb.url, 'categorias');
+app.use('/categorias', require('./categorias/crud')(categoriasModelo));
+app.use('/api/categorias', require('./categorias/api')(categoriasModelo));
+
+// Páginas estáticas ================
+app.use(express.static('public'));
+
 
 // routes ================================================
 require('./routes.js')(app, passport);

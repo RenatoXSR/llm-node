@@ -1,3 +1,6 @@
+// =====================
+// # /categorias/crud.js
+//
 'use strict';
 
 var express = require('express');
@@ -28,22 +31,24 @@ module.exports = function (model) {
 	});
 
   /**
-   * GET /processos/
+   * GET /categorias/
    *
    * Mostrar a página que lista todos os processos.
    */
-  router.get('/', function list(req, res, next) {
-      var perPage = 10;
-      if (req.query.perPage!=null){          
-          console.log("perPage definido como " + req.query.perPage);
-          perPage = req.query.perPage;
-      } else {console.log("perPage não definido. Retornando padrão '10'");}
-      model.list(parseInt(perPage), req.query.pageToken, function (err, entities, cursor) {
+  router.get('/tipo/:tipo', function list(req, res, next) {
+      model.list({"tipo":req.params.tipo}, function (err, entities) {
       if (err) { return next(err); }
-      res.render('processos/list.jade', {
-        processos: entities,
-        perPage: perPage,
-        nextPageToken: cursor
+      res.render('categorias/list-tipo.jade', {
+        categorias: entities
+      });
+    });
+  });
+
+  router.get('/', function list(req, res, next) {
+      model.list({}, function (err, entities) {
+      if (err) { return next(err); }
+      res.render('categorias/list.jade', {
+        categorias: entities
       });
     });
   });
@@ -57,7 +62,9 @@ module.exports = function (model) {
   router.get('/novo', function addForm(req, res) {
     res.render('processos/form.jade', {
       processo: {},
-      action: 'Novo'
+      action: 'Novo',
+      categorias: require('./classesProcessuais')
+
     });
   });
   // [END add_get]
@@ -88,7 +95,8 @@ module.exports = function (model) {
       if (err) { return next(err); }
       res.render('processos/form.jade', {
         processo: entity,
-        action: 'Editar'
+        action: 'Editar',
+        categorias: require('./classesProcessuais')(config)
       });
     });
   });
