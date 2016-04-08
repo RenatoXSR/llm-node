@@ -16,7 +16,7 @@ module.exports = function (model) {
 		next();
 	});
   
-	router.use(function isLoggedIn(req, res, next) {
+/*	router.use(function isLoggedIn(req, res, next) {
 
 		// if user is authenticated in the session, carry on 
 		if (req.isAuthenticated())
@@ -26,7 +26,7 @@ module.exports = function (model) {
 		//res.render('login');
 		res.redirect('/?redir='+encodeURIComponent(req.baseUrl));
 	});
-
+*/
   /**
    * GET /processos/
    *
