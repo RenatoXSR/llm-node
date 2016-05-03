@@ -6,7 +6,16 @@
 
 var path = require('path');
 var express = require('express');
-var config = require('./config')();
+
+//============ Config files
+var config = require('./config')(); // To be deprecated
+const serverIp = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
+const serverPort = process.env.OPENSHIFT_NODEJS_PORT || 8080;
+const dbHost = process.env.OPENSHIFT_MONGODB_DB_HOST || 'localhost';
+const dbPort = process.env.OPENSHIFT_MONGODB_DB_PORT || '27017';
+const dbUri = process.env.MONGOLAB_URI || 'mongodb://'+dbHost+':'+dbPort+'/test';
+
+
 
 //=======================================================
 // Setup for passport auth
@@ -90,9 +99,9 @@ app.use(function (err, req, res, next) {
 
 if (module === require.main) {
   // Start the server
-  var server = app.listen(config.port, function () {
+  var server = app.listen(serverPort, function () {
     var host = server.address().address;
-    var port = server.address().port;
+    var port = server.address().serverPort;
 
     console.log('App listening at http://%s:%s', host, port);
   });
