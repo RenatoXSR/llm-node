@@ -4,7 +4,7 @@ var getConfig = module.exports = function () {
   const mongodbUser = process.env.MONGODB_USER || 'ADMIN';
   const mongodbPassword = process.env.MONGODB_PASSWORD || 'PASSWORD';
   const mongodbName = process.env.MONGODB_NAME || 'test';
-  const mongodbDomain = (process.env.MONGODB_HOST || process.env.OPENSHIFT_MONGODB_DB_HOST) || '127.0.0.1';
+  const mongodbHost = (process.env.MONGODB_HOST || process.env.OPENSHIFT_MONGODB_DB_HOST) || '127.0.0.1';
   const mongodbPort = (process.env.MONGODB_PORT || process.env.OPENSHIFT_MONGODB_DB_PORT) || '27017';
   const mongodbUri = process.env.MONGOLAB_URI || 'mongodb://'+mongodbUser+':'+mongodbPassword+'@'+mongodbHost+':'+mongodbPort+'/'+mongodbName;
   const serverIp = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
