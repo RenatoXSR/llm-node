@@ -6,7 +6,7 @@ var getConfig = module.exports = function () {
   const mongodbName = process.env.MONGODB_NAME || 'test';
   const mongodbDomain = (process.env.MONGODB_HOST || process.env.OPENSHIFT_MONGODB_DB_HOST) || '127.0.0.1';
   const mongodbPort = (process.env.MONGODB_PORT || process.env.OPENSHIFT_MONGODB_DB_PORT) || '27017';
-  const mongodbUri = process.env.MONGOLAB_URI || 'mongodb://'+mongodbUser+':'+mongodbPassword+'@'+mongodbHost+':'++'/'+mongodbName;
+  const mongodbUri = process.env.MONGOLAB_URI || 'mongodb://'+mongodbUser+':'+mongodbPassword+'@'+mongodbHost+':'+mongodbPort+'/'+mongodbName;
   const serverIp = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
   const serverPort = process.env.OPENSHIFT_NODEJS_PORT || process.env.PORT;
 
