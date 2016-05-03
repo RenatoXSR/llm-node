@@ -44,8 +44,8 @@ var store = new MongoDBStore({
  
     // Catch errors 
     store.on('error', function(error) {
-      assert.ifError(error);
-      assert.ok(false);
+//      assert.ifError(error);
+//      assert.ok(false);
     });
  
     app.use(require('express-session')({
