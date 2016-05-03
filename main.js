@@ -53,6 +53,7 @@ var store = new MongoDBStore({
       cookie: {
         maxAge: 1000 * 60 * 60 * 24 * 7 // 1 week 
       },
+      saveUninitialized: true;
       store: store
     }));
 
