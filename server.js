@@ -4,19 +4,18 @@
 
 'use strict';
 
-var path = require('path');
-var express = require('express');
-var config = require('./config')();
+var path         = require('path'),
+    express      = require('express'),
+    config       = require('./config')(),
+    mongoose     = require('mongoose'),
+    passport     = require('passport'),
+    flash        = require('connect-flash'),
+    morgan       = require('morgan'),
+    cookieParser = require('cookie-parser'),
+    bodyParser   = require('body-parser'),
+    session      = require('express-session'),
+    MongoDBStore = require('connect-mongodb-session')(session);
 
-//=======================================================
-// Setup for passport auth
-var mongoose = require('mongoose');
-var passport = require('passport');
-var flash    = require('connect-flash');
-var morgan       = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser   = require('body-parser');
-var session      = require('express-session');
 
 // configuration ========================================
 mongoose.connect(config.mongodb.url, function connectionError(error){console.error(error);}); // connect to our database
@@ -32,12 +31,39 @@ var app = express();
 // set up our express application
 app.use(morgan('dev')); // log every request to the console
 app.use(cookieParser()); // read cookies (needed for auth)
-app.use(bodyParser()); // get information from html forms
+app.use(bodyParser.json()); // get information from html forms
+app.use(bodyParser.urlencoded({extended: false})); // get information from html forms
 
 // app.set('view engine', 'ejs'); // set up ejs for templating
 
+// Session on Mongodb
+
+var store = new MongoDBStore({ 
+      uri: config.mongodb.url,
+      collection: 'sessions'
+      });
+ 
+    // Catch errors 
+    store.on('error', function(error) {
+//      assert.ifError(error);
+//      assert.ok(false);
+    });
+ 
+    app.use(require('express-session')({
+      secret: 'esteéumprogramaQUeestáUsandpeoSEcret20160503',
+      cookie: {
+        maxAge: 1000 * 60 * 60 * 24 * 7 // 1 week 
+      },
+      saveUninitialized: true,
+      resave: true,
+      store: store
+    }));
+
+
+// DEPRECATED AND SHOULDN'T BE USED IN PRODUCTION:
+//app.use(session({ secret: 'esteéumprogramaQUeestáUsandpeoSEcret' })); // session secret
+
 // required for passport
-app.use(session({ secret: 'esteéumprogramaQUeestáUsandpeoSEcret15-4-2016' })); // session secret
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session
