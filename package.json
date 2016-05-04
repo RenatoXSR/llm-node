@@ -1,8 +1,8 @@
 {
   "name": "llm-node",
-  "version": "1.0.0",
-  "description": "Legal Lawyer Manager - Node Base",
-  "main": "main.js",
+  "version": "1.1.0",
+  "description": "Legal Lawyer Manager (LLM)",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node main.js"
@@ -19,7 +19,7 @@
     "mongodb",
     "angular",
     "legal",
-    "lawyer",
+    "lawyer",x
     "manager"
   ],
   "author": "RenatoXSR (Alpha Sagittarii Empreendimentos e Participações EIRELI)",
@@ -37,7 +37,7 @@
     "express-session": "^1.13.0",
     "googleapis": "^3.1.0",
     "jade": "^1.11.0",
-    "mongodb": "^2.1.8",
+    "mongodb": "^2.1.18",
     "mongoose": "^4.4.7",
     "morgan": "^1.7.0",
     "passport": "^0.3.2",
@@ -46,7 +46,8 @@
     "passport-google-oauth": "^1.0.0",
     "passport-linkedin": "^1.0.0",
     "passport-local": "^1.0.0",
-    "passport-twitter": "^1.0.4"
+    "passport-twitter": "^1.0.4",
+    "crudeasy": "^0.1.4"
   },
   "engines": {
     "node": "~4.4.0"

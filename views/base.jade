@@ -1,12 +1,15 @@
 doctype html
-html(lang="pt-br")
+html(lang="pt-br", ng-app="ngLLM")
 	head
 		title [LLM] Legal Lawyer Manager [Node.js base]
 		meta(charset='utf-8')
 		meta(http-equiv="X-UA-Compatible", content="IE=edge")
 		meta(name="viewport", content="width=device-width, initial-scale=1")
+		base(href="")
 		block scripts
-				script(src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js")
+				- //script(src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js")
+				- //script(src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular-resource.min.js")
+				- //script(src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular-route.min.js")
 				script(src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js")
 				script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js")
 				link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css")
@@ -27,9 +30,9 @@ html(lang="pt-br")
 							span.glyphicon.glyphicon-cloud
 							| &nbsp;[LLM] Legal Lawyer Manager
 					.collapse.navbar-collapse#main-navbar
-						ul.nav.navbar-nav
+						ul.nav.navbar-nav.navbar-right
 							li
-								a(href="/")
+								a(href="/perfil")
 									span.glyphicon.glyphicon-home
 							li
 								a(href="/processos")
@@ -40,9 +43,9 @@ html(lang="pt-br")
 									span.glyphicon.glyphicon-briefcase
 									| &nbsp;Clientes
 							li
-								a(href="/partes")
+								a(href="/pessoas")
 									span.glyphicon.glyphicon-pencil
-									| &nbsp;Partes
+									| &nbsp;Pessoas
 							li
 								a(href="/usuarios")
 									span.fa.fa-users
@@ -50,25 +53,19 @@ html(lang="pt-br")
 							li
 								a(href="/categorias")
 									span.glyphicon.glyphicon-cog
-						p.navbar-text.navbar-right
-						p.navbar-text
-							| [
-							a(href="http://www.silveirarosa.com") Advocacia Silveira Rosa
-							| ]
-						#gitkitWidgetDiv
+									| &nbsp;Categorias
 		main
 			#wrap(style="min-height: 100%;height: auto !important;height: 100%;margin: 0 auto 60px;}")
 				.container#wrap
 					block content
 		footer.container-fluid.text-center
-			#footer.container(style="background-color:#eee;height:120px;width:100%;padding-left:20px;padding-right:20px;")
-					br
-					br
+			#footer.container.well
 					p 2016 © Advocacia Silveira Rosa. Todos os direitos reservados.
 					p Desenvolvido por Renato Rosa e Alpha Sagittarii Empreendimentos e Participações, em Barueri/SP.
 					script
-						| $(function(
+						| $(function(){
 						block footer-jquery
-						| ))
+						| })
+					block footer
 						
 		

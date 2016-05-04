@@ -3,11 +3,12 @@
 ##
 ## see instructions in config-template.js
 ################
-config.js
+config_private.js
 gitkit-server-secret.json
 gitkit-server-config.json
 .mongorc.js
-
+old_files
+old_files/*
 
 
 #########
