@@ -4,17 +4,37 @@
  *
  */
 
+(function($) {
+    $.QueryString = (function(a) {
+        if (a == "") return {};
+        var b = {};
+        for (var i = 0; i < a.length; ++i)
+        {
+            var p=a[i].split('=');
+            if (p.length != 2) continue;
+            b[p[0]] = decodeURIComponent(p[1].replace(/\+/g, " "));
+        }
+        return b;
+    })(window.location.search.substr(1).split('&'))
+})(jQuery);
+
 function popularFiltro(loadUrl, id){
 	$.getJSON({
 		url: loadUrl,
 		success: function(data){
-			var fields = data.categorias;
+			var fields = data.categorias || data;
 			$( id ).empty(); //verificar se dá problema...
 			if (fields==null) {
 				$(id).append('<option>Nenhum filtro encontrado.<option>');
+				return;
 				}
+			$(id).append('<option>Selecione uma opção</option>');
 			$.each( fields, function(i,option ) {
-				$( id ).append( '<option value="' + option.id + '">' + option.alias + '</option>');
+				if (option.alias != '' && option.alias != undefined) {
+					$( id ).append( '<option value="' + option.id + '">' + option.alias + '</option>');
+				} else if (option.fullName!='' && option.fullName != undefined) {
+					$( id ).append( '<option value="' + option.id.$oid + '">' + option.fullName + '</option>');
+					}
 				});
 			}
 		});
@@ -41,6 +61,10 @@ function carregarFiltros(){
 		["/api/clientes","#cliente"],
 		["/api/pessoas/filtro/parteCliente","#parteCliente"],
 		["/api/pessoas/filtro/parteContraria","#parteContraria"]];
+/*	var pessoas = [
+		["l=100&sk=0&f={alias:1,_id:1}}&s={alias:1}}&q={}","#cliente"],
+		['l=100&sk=0&f={fullName:1,_id:1}}&s={fullName:1}}&q={eParteClienteLegado:"S"}',"#parteCliente"],
+		['l=100&sk=0&f={fullName:1,_id:1}}&s={fullName:1}}&q={eParteContrariaLegado:"S"}',"#parteContraria"]];*/
 	$.each(tipos,function(i,obj){
 		popularFiltroCategoria(obj[0], obj[1])
 		});
@@ -74,7 +98,7 @@ function tabelaProcessosLinha(i,processo){
 		retorno+= '&nbsp;(<a href="' + processo.link + '" target="_blank">Abrir link</a>)';
 		}
 	retorno += '</td>';
-	retorno += '<td><a href="/processos/' + processo.id + '">' + processo.numero + '(Abrir)</a></td>';
+	retorno += '<td><a href="/processos/' + processo.id + '">' + processo.numero + '&nbsp;<small>(Abrir)</small></a></td>';
 	retorno += '<td>'+ processo.cliente + '</td>';
 	retorno += '<td>'+ processo.parteCliente + '</td>';
 	retorno += '<td>'+ processo.parteContraria + '</td>';
@@ -87,13 +111,19 @@ function tabelaProcessosLinha(i,processo){
 	retorno += '</tr>';
 	return retorno;
 	}
+
 function carregarTabela() {
+	$("#tdCarregando").addClass("fa fa-spinner fa-spin fa-lg")
+	var filtros = $('#filtro').serializeArray();
+	//window.alert(JSON.stringify(filtros));
+	qs = '/api/processos?pageToken='+$.QueryString('pageToken');
 	$.ajax({
-		url: '/api/processos/',
+		url: '/api/processos/'+,
 		dataType: 'json',
 		success: function(data){
 			//var fields = $( ":input" ).serializeArray();
 			var fields = data.items;
+			window.alert(fields);
 			$( "#tabelaProcessos" ).empty();
 			if (fields==null) {
 				$("tabelaProcessos").append("Nenhum processo encontrado");
@@ -104,5 +134,7 @@ function carregarTabela() {
 			}
 		});
 	}
-$( ":checkbox, :radio" ).click( carregarTabela );
+//$( ":checkbox, :radio" ).click( carregarTabela );
 $( "select" ).change( carregarTabela );
+
+

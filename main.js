@@ -25,7 +25,7 @@ mongoose.connection.on('error', function dbConnectionError(err, req, res, next){
   res.status(500).send(err.response || 'DB Connection Error!');
 });
 
-require('./modelos/passport')(passport); // pass passport for configuration
+require('./lib/passport')(passport); // pass passport for configuration
 
 var app = express();
 
@@ -37,7 +37,7 @@ app.use(bodyParser()); // get information from html forms
 // app.set('view engine', 'ejs'); // set up ejs for templating
 
 // required for passport
-app.use(session({ secret: 'esteéumprogramaQUeestáUsandpeoSEcret' })); // session secret
+app.use(session({ secret: 'esteéumprogramaQUeestáUsandpeoSEcret15-4-2016' })); // session secret
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session
@@ -54,10 +54,83 @@ app.set('trust proxy', true);
 //app.configure('development', function () { app.locals.pretty = true; });
 
 
+//=========================
+//  START
+
+// Calls the Module 3 times, for routes and collections Movies and Actors.
+var crudEasy = require('crudeasy');
+var isLoggedIn = function isLoggedIn(req, res, next) {
+		// if user is authenticated in the session, carry on 
+		if (req.isAuthenticated())
+			return next();
+		// if they aren't redirect them to the home page
+		//res.render('login');
+		res.redirect('/?redir='+encodeURIComponent(req.baseUrl));
+	};
+
+
+//  END
+//===========================
+
 // Processos ================
-var processosModelo = require('./processos/processosModelo')(config);
-app.use('/processos', require('./processos/crud')(processosModelo));
-app.use('/api/processos', require('./processos/api')(processosModelo));
+var configProcessos = {
+    url: config.mongodb.url,
+    collection:     "processos",
+    defaultPerPage: 10,
+    routeNew:       "/novo",
+    routeDelete:    "/:item/excluir",
+    routeEdit:      "/:item/editar",
+    labelNew:       "Novo",
+    labelEdit:      "Editar",
+    viewNew:        "processos/form.jade", 
+    viewItem:       "processos/view.jade",
+    viewList:       "processos/list.jade",
+    viewEdit:       "processos/form.jade",
+	middle:			isLoggedIn
+	};
+var instProcessos = crudEasy.newModel(config.mongodb.url, 'processos');
+app.use('/processos', crudEasy.crudRoute(instProcessos,configProcessos));
+app.use('/api/processos', crudEasy.apiRoute(instProcessos,configProcessos));
+
+// Pessoas ================
+var configPessoas = {
+    url: 			config.mongodb.url,
+    collection:     "pessoas",
+    defaultPerPage: 10,
+    routeNew:       "/novo",
+    routeDelete:    "/:item/excluir",
+    routeEdit:      "/:item/editar",
+    labelNew:       "Novo",
+    labelEdit:      "Editar",
+    viewNew:        "pessoas/form.jade", 
+    viewItem:       "pessoas/view.jade",
+    viewList:       "pessoas/list.jade",
+    viewEdit:       "pessoas/form.jade",
+	middle:			isLoggedIn
+	};
+var instPessoas = crudEasy.newModel(config.mongodb.url, 'pessoas');
+app.use('/pessoas', crudEasy.crudRoute(instPessoas,configPessoas));
+app.use('/api/pessoas', crudEasy.apiRoute(instPessoas,configPessoas));
+
+// Clientes ================
+var configClientes = {
+    url: 			config.mongodb.url,
+    collection:     "clientes",
+    defaultPerPage: 10,
+    routeNew:       "/novo",
+    routeDelete:    "/:item/excluir",
+    routeEdit:      "/:item/editar",
+    labelNew:       "Novo",
+    labelEdit:      "Editar",
+    viewNew:        "clientes/form.jade", 
+    viewItem:       "clientes/view.jade",
+    viewList:       "clientes/list.jade",
+    viewEdit:       "clientes/form.jade",
+	middle:			isLoggedIn
+	};
+var instClientes = crudEasy.newModel(config.mongodb.url, 'clientes');
+app.use('/clientes', crudEasy.crudRoute(instPessoas,configClientes));
+app.use('/api/clientes', crudEasy.apiRoute(instPessoas,configClientes));
 
 
 // Categorias ================

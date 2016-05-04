@@ -9,7 +9,7 @@ block content
 		.col-sm-2
 			a(href="/processos/novo", class='btn btn-success btn-sm')
 				i.glyphicon.glyphicon-plus
-				span Novo processo
+				span &nbsp;Novo processo
 		.col-md-offset-2
 			button.btn.btn-primary.col-sm-4.col-md-8(type="button", data-toggle="collapse", data-target="#wellFiltros") Selecione os filtros desejados
 	.collapse.well#wellFiltros
@@ -115,13 +115,17 @@ block content
 					th Observações
 			tbody#tabelaProcessos
 				tr
-					td Carregando...
+					td
+						span#tdCarregando
+						| &nbsp;Carregando...
 
 	if nextPageToken
 		nav
-			ul.pager
+			ul.pager#next
 				li
-					a(href="?pageToken=#{encodeURIComponent(nextPageToken)}&perPage=#{encodeURIComponent(perPage)}") Mais
+					a(href="?pageToken=#{encodeURIComponent(nextPageToken)}&perPage=#{encodeURIComponent(perPage)}")
+						span#spinner
+						| &nbsp;Mais
 append footer-jquery
 	| carregarTabela();
 	| carregarFiltros();
