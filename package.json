@@ -1,11 +1,11 @@
 {
   "name": "llm-node",
-  "version": “1.1.1”,
+  "version": "1.1.2",
   "description": "Legal Lawyer Manager (LLM)",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node main.js"
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
@@ -19,7 +19,7 @@
     "mongodb",
     "angular",
     "legal",
-    "lawyer",x
+    "lawyer",
     "manager"
   ],
   "author": "RenatoXSR (Alpha Sagittarii Empreendimentos e Participações EIRELI)",
@@ -32,8 +32,10 @@
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.15.0",
     "connect-flash": "^0.1.1",
+    "connect-mongo": "^1.2.0",
     "connect-mongodb-session": "^1.1.1",
     "cookie-parser": "^1.4.1",
+    "crudeasy": "^0.1.4",
     "express": "^4.13.4",
     "express-session": "^1.13.0",
     "googleapis": "^3.1.0",
@@ -47,8 +49,7 @@
     "passport-google-oauth": "^1.0.0",
     "passport-linkedin": "^1.0.0",
     "passport-local": "^1.0.0",
-    "passport-twitter": "^1.0.4",
-    "crudeasy": "^0.1.4"
+    "passport-twitter": "^1.0.4"
   },
   "engines": {
     "node": "~4.4.0"

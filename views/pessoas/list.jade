@@ -1,4 +1,4 @@
-// GET /pessoas/ (lista)
+-// GET /pessoas/list.jade
 extends ../base.jade
 block content
 	h3 Pessoas
@@ -16,22 +16,22 @@ block content
 					th Parte Cliente?
 					th Parte Contrária?
 			tbody
-				each pessoa in pessoas
+				each item in items
 						tr
 							td
-								a(href="/pessoas/#{pessoa.id}") #{pessoa.fullName}
-							td= pessoa.natPessoa
+								a(href="/pessoas/#{item.id}") #{item.fullName}
+							td= item.natPessoa
 							td
-								if(pessoa.eParteClienteLegado=='S')
+								if(item.eParteClienteLegado=='S')
 									span.fa.fa-check-square-o
 								else
 									span.fa.fa-square-o
 							td
-								if(pessoa.eParteContrariaLegado=='S')
+								if(item.eParteContrariaLegado=='S')
 									span.fa.fa-check-square-o
 								else
 									span.fa.fa-square-o
-	if !pessoas.length
+	if !items.length
 		p Nenhuma pessoa encontrado.
 	if nextPageToken
 		nav

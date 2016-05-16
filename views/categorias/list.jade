@@ -1,3 +1,4 @@
+- // /views/categorias/list.jade
 extends ../base.jade
 block content
 	mixin tabelaCategoria(dbName,fullName)
@@ -9,11 +10,11 @@ block content
 						th id
 						th alias
 				tbody
-					each categoria in categorias
-						if categoria.tipo==dbName
+					each item in items
+						if item.tipo==dbName
 							tr
-								td= categoria.id
-								td= categoria.alias
+								td= item.id
+								td= item.alias
 	+tabelaCategoria('acomp','Tipos de acompanhamento')
 	+tabelaCategoria('uf','Estados')
 	+tabelaCategoria('status','Tipos de Status')

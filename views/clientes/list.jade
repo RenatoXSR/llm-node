@@ -1,26 +1,32 @@
+- // /views/clientes/list.jade
 extends ../base.jade
 block content
-	mixin tabelaCategoria(dbName,fullName)
-		h3= fullName
-		.table-responsive
-			table.table.table-striped.table-condensed
-				thead
+	h3= fullName
+	.table-responsive
+		table.table.table-striped.table-condensed
+			thead
+				tr
+					th id
+					th Alias
+					th Num (Legado)
+					th Full Name
+					th Contato Financeiro
+					th Contato Processual
+			tbody
+				each item in items
 					tr
-						th id
-						th alias
-				tbody
-					each categoria in categorias
-						if categoria.tipo==dbName
-							tr
-								td= categoria.id
-								td= categoria.alias
-	+tabelaCategoria('acomp','Tipos de acompanhamento')
-	+tabelaCategoria('uf','Estados')
-	+tabelaCategoria('status','Tipos de Status')
-	+tabelaCategoria('instancia','Tipos de instância')
-	+tabelaCategoria('adv','Tipos de advogado')
-	+tabelaCategoria('resp','Tipos de responsável')
-	+tabelaCategoria('fase','Tipos de fase')
-	+tabelaCategoria('natAcao','Tipos de natureza de ação')
-	+tabelaCategoria('natVara','Tipos de natureza de vara')
-	+tabelaCategoria('numVara','Tipos de numero de vara')
+						td= item.id
+						td= item.alias
+						td #{item.num}&nbsp;(#{item.numLegado})
+						td= item.fullName
+						td
+							a(href='mailto:#{item.emailFinanceiro}') #{item.tratamento}&nbsp;#{item.contatoFinanceiro}
+						td
+							a(href="#{item.emailProcessual}") #{item.tratamentoProcessual}&nbsp;#{item.contatoProcessual}
+	if !items.length
+		p Nenhuma pessoa encontrado.
+	if nextPageToken
+		nav
+			ul.pager
+				li
+					a(href="?pageToken=#{encodeURIComponent(nextPageToken)}") Mais

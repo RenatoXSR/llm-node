@@ -28,7 +28,7 @@ var getConfig = module.exports = function () {
 
     mongodb: {
       url: process.env.MONGO_URL || mongodbUri,
-      collection: process.env.MONGO_COLLECTION || 'processos'
+      collection: process.env.MONGO_COLLECTION || 'test'
     },
 	
 	
