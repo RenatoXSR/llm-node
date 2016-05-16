@@ -1,6 +1,6 @@
 {
   "name": "llm-node",
-  "version": "1.1.0",
+  "version": “1.1.1”,
   "description": "Legal Lawyer Manager (LLM)",
   "main": "server.js",
   "scripts": {
@@ -32,6 +32,7 @@
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.15.0",
     "connect-flash": "^0.1.1",
+    "connect-mongodb-session": "^1.1.1",
     "cookie-parser": "^1.4.1",
     "express": "^4.13.4",
     "express-session": "^1.13.0",
