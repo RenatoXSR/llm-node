@@ -125,7 +125,7 @@ block content
 					th Fase
 					th Observações
 			tbody#tabelaProcessos
-				- var j=parseInt(pageToken)
+				- var j=parseInt(pageToken || 0)
 				- j++
 				each processo, i in items
 					tr

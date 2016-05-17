@@ -8,6 +8,7 @@ block content
 			a(href="novo", class='btn btn-success btn-sm')
 				i.glyphicon.glyphicon-plus
 				span &nbsp;Nova pessoa
+	+navegacao
 	.table-responsive
 		table.table.table-striped.table-condensed
 			thead
@@ -34,8 +35,4 @@ block content
 									span.fa.fa-square-o
 	if !items.length
 		p Nenhuma pessoa encontrado.
-	if nextPageToken
-		nav
-			ul.pager
-				li
-					a(href="?pageToken=#{encodeURIComponent(nextPageToken)}") Mais
+	+navegacao

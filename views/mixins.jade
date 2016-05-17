@@ -3,13 +3,17 @@
 mixin navegacao
 	nav
 		ul.pager
-			if (pageToken)
+			if (pageToken && pageToken!=0)
 				li
 					a(href="?pageToken=#{pageToken-perPage}")
 						i.glyphicon.glyphicon-backward
 						span &nbsp;Voltar página
 				span &nbsp;
-			if nextPageToken
+			else
+				span &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			if !nextPageToken
+				span &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			else
 				li
 					a(href="?pageToken=#{encodeURIComponent(nextPageToken)}")
 						span Próxima página&nbsp;
