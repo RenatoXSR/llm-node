@@ -5,25 +5,6 @@ apend scripts
   script
 
 block content
-  if !query
-    - var query = {}
-    p= query
-  if !query.categorias
-    - var query.categorias = {}
-    - query.categorias.acomp={}
-    - query.categorias.clientes={}
-    - query.categorias.uf={}
-    - query.categorias.fase={}
-    - query.categorias.pessoas={}
-    - query.categorias.advogado={}
-    - query.categorias.adv={}
-    - query.categorias.resp={}
-    - query.categorias.natVara={}
-    - query.categorias.numVara={}
-    - query.categorias.natAcao={}
-    - query.categorias.status={}
-    - var categorias = query.categorias
-
   h3 #{action} processo
   form(method="POST")
     .form-group.row
@@ -34,11 +15,7 @@ block content
       label.form-control-label.col-sm-2(for="numero") Acompanhamento:
       .col-sm-10
         select.form-control(name="acomp", id="acomp")
-          for acomps in query.categorias.acomp
-            if item.acomp == acomps
-              option(selected="true") #{acomps}
-            else
-              option #{acomps}
+              option(selected="true") #{item.acomp}
     .form-group.row
       label.form-control-label.col-sm-2(for="link") Link de acompanhamento:
       .col-sm-10
@@ -47,11 +24,7 @@ block content
       label.form-control-label.col-sm-2(for="cliente") Cliente:
       .col-sm-10
         select.form-control(name="cliente", id="cliente")
-            for cliente in query.categorias.clientes
-              if item.cliente == cliente
-                option(selected="true") #{cliente}
-              else
-                option #{cliente}
+                option(selected="true") #{item.cliente}
     .form-group.row
       label.form-control-label.col-sm-2(for="parteCliente") Parte cliente:
       .col-sm-10
@@ -64,22 +37,14 @@ block content
       label.form-control-label.col-sm-2(for="advogado") Advogado:
       .col-sm-2
         select.form-control(name="advogado", id="advogado", size="6", multiple="multiple")
-          for advogado in query.categorias.advogados
-            if item.advogado == advogado
-              option(selected="true") #{advogado}
-            else
-              option #{advogado}
+              option(selected="true") #{item.advogado}
       .col-sm-2
         p.form-control-text (Seleção múltipla. Segura ctrl ou command para selecionar mais de um)
     .form-group.row
       label.form-control-label.col-sm-2(for="responsavel") Responsável&#58;
       .col-sm-2
         select.form-control(name="responsavel", id="responsavel", size="6", multiple="multiple")
-          for responsavel in query.categorias.responsaveis
-            if item.responsavel == responsavel
-              option(selected="true") #{responsavel}
-            else
-              option #{responsavel}
+              option(selected="true") #{item.responsavel}
       .col-sm-2
         p.form-control-text (Seleção múltipla. Segura ctrl ou command para selecionar mais de um)
     hr
@@ -88,68 +53,86 @@ block content
       label.form-control-label.col-sm-2(for="estado") Estado (UF):
       .col-sm-2
         select.form-control.col-sm-2(name="estado", id="estado")
-          for estado in query.categorias.estados
-            if item.estado == estado
-              option(selected="true") #{estado}
-            else
-              option #{estado}
+              option(selected="true") #{item.estado}
     .form-group.row
       label.form-control-label.col-sm-2(for="comarca") Comarca:
       .col-sm-2
-        select.form-control(name="comarca", id="comarca", disabled="disabled")
-          option Selecione o estado
-          
+        select.form-control(name="comarca", id="comarca")
+          option(selected="true") #{item.comarca}
     .form-group.row
       label.form-control-label.col-sm-2(for="instancia") Instância:
       .col-sm-2
         select.form-control(name="instancia", id="instancia")
-          for instancia in query.categorias.instancias
-            if item.instancia == instancia
-              option(selected="true") #{instancia}
-            else
-              option #{instancia}
+              option(selected="true") #{item.instancia}
     .form-group.row
       label.form-control-label.col-sm-2(for="numVara") Vara:
       .col-sm-2
         select.form-control(name="numVara", id="numVara")
-          for numVara in query.categorias.numVaras
-            if item.numVara == numVara
-              option(selected="true") #{numVara}
-            else
-              option #{numVara}
+              option(selected="true") #{item.numVara}
       .col-sm-2
         select.form-control(name="natVara", id="natVara")
-          for natVara in query.categorias.natVaras
-            if item.natVara == natVara
-              option(selected="true") #{natVara}
-            else
-              option #{natVara}
+              option(selected="true") #{item.natVara}
     hr
     .form-group.row
       label.form-control-label.col-sm-2(for="fase") Fase
       .col-sm-2
         select.form-control(name="fase", id="fase")
-          for fase in query.categorias.fases
-            if item.fase == fase
-              option(selected="true") #{fase}
-            else
-              option #{fase}
+              option(selected="true") #{item.fase}
     .form-group.row
       label.form-control-label.col-sm-2(for="status") Status atual
       .col-sm-2
         select.form-control(name="status", id="status")
-          for stato in query.categorias.status
-            if item.status == stato
-              option(selected="true") #{stato}
-            else
-              option #{stato}
+              option(selected="true") #{item.status}
     .form-group.row
       label.form-control-label.col-sm-2(for="observacoes") Observações
       .col-sm-10
         input.form-control(type="text", name="observacoes", id="observacoes", value=item.observacoes)
-    .form-group
-    .col-sm-offset-2
-      button.btn.btn-success.col-sm-2(type="submit") Salvar
+  hr
+  h4 Andamentos do Processo n.º #{item.numero}
+  .table-responsive
+    table.table.table-striped.table-condensed
+      thead
+        tr
+          th #
+          th Data
+          th Tipo
+          th Andamento
+          th Relevante?
+          th Lançado por, em
+          th Modificado por, em
+          th Editar/Excluir
+      tbody
+        if !item.andamentos
+          td
+            p Nenhum andamento encontrado.
+        else
+          each andamento, i in item.andamentos
+            - i++
+              tr
+                td= i.toString()
+                td= andamento.data
+                td= andamento.tipo
+                td= andamento.conteudo
+                if (andamento.eRelevante)
+                  td Sim
+                else
+                  td Não
+                td Lançado por #{andamento.lancadoPor} em #{andamento.lancadoEm}
+                  | .
+                td Modificado por #{andamento.modificadoPor} em #{andamento.modificadoEm}
+                  | .
+                td
+        .btn-group
+          a(href="#", class='btn btn-primary btn-sm')
+            i.glyphicon.glyphicon-edit
+            span  Editar
+          a(href="#", class='btn btn-danger btn-sm')
+            i.glyphicon.glyphicon-trash
+            span  Excluir
+  hr
+  .form-group
+  .col-sm-offset-2
+    button.btn.btn-success.col-sm-2(type="submit") Salvar tudo
 
 // [END form]
 // LINK	ACOMP	NUM_PROC	CLIENTE	PARTE_CLIENTE	PARTE_EX	ADV	RESP	ESTADO	INST	COMARCA	NUM_VARA	NAT_VARA	NAT_ACAO	FASE	STATUS_ATUAL	AND_RELEVANTES	OBSERVACOES
