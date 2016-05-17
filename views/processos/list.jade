@@ -10,8 +10,18 @@ block content
 			a(href="/processos/novo", class='btn btn-success btn-sm')
 				i.glyphicon.glyphicon-plus
 				span &nbsp;Novo processo
-		.col-md-offset-2
-			button.btn.btn-primary.col-sm-4.col-md-8(type="button", data-toggle="collapse", data-target="#wellFiltros") Selecione os filtros desejados
+		.col-md-4.col-lg-8
+			button.btn.btn-primary(type="button", data-toggle="collapse", data-target="#wellFiltros") Selecione os filtros desejados
+		.col-md-2
+			p.form-group-text Resultados por página&#58;&nbsp;
+				a(href="?perPage=10") 10
+				| &nbsp;&verbar;&nbsp;
+				a(href="?perPage=100") 100
+				| &nbsp;&verbar;&nbsp;
+				a(href="?perPage=500") 500
+				| &nbsp;&verbar;&nbsp;
+				a(href="?perPage=1000") 1000
+	+navegacao()
 	.collapse.well#wellFiltros
 		form#filtro
 			.form-group.row
@@ -102,6 +112,7 @@ block content
 		table.table.table-striped.table-condensed(border='1')
 			thead
 				tr
+					th #
 					th Acompanhamento (link)
 					th Processo n.º (clique para editar)
 					th Cliente
@@ -114,18 +125,50 @@ block content
 					th Fase
 					th Observações
 			tbody#tabelaProcessos
-				tr
-					td
-						span#tdCarregando
-						| &nbsp;Carregando...
+				- var j=parseInt(pageToken)
+				- j++
+				each processo, i in items
+					tr
+						td 
+							small= j.toString()
+								- j++
+						td
+							| #{processo.acomp}
+							if processo.link
+								| &nbsp;(
+								a(href="#{processo.link}", target="_blank") Abrir link
+								| )
+						if(!processo.numero)
+							td
+								a(href="/processos/#{processo.id}") Abrir/Editar
+						td 
+							a(href="/processos/#{processo.id}") #{processo.numero}
+						td= processo.cliente
+						td= processo.parteCliente
+						td= processo.parteContraria
+						td= processo.advogado
+						td= processo.responsavel
+						td
+							| #{processo.comarca}
+							| /
+							| #{processo.estado}
+							| &nbsp;(
+							| #{processo.instancia}
+							| )
+						td
+							| #{processo.numVara}
+							| &nbsp;
+							| #{processo.natVara}
+						td
+							| #{processo.fase}
+							| /
+							| #{processo.status}
+						td= processo.observacoes
+				if !items.length
+					tr
+						td Nenhum processo encontrado.
+	+navegacao
 
-	if nextPageToken
-		nav
-			ul.pager#next
-				li
-					a(href="?pageToken=#{encodeURIComponent(nextPageToken)}&perPage=#{encodeURIComponent(perPage)}")
-						span#spinner
-						| &nbsp;Mais
 append footer-jquery
 	| carregarTabela();
 	| carregarFiltros();

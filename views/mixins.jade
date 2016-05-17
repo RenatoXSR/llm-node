@@ -1,0 +1,16 @@
+- // /mixins.jade
+
+mixin navegacao
+	nav
+		ul.pager
+			if (pageToken)
+				li
+					a(href="?pageToken=#{pageToken-perPage}")
+						i.glyphicon.glyphicon-backward
+						span &nbsp;Voltar página
+				span &nbsp;
+			if nextPageToken
+				li
+					a(href="?pageToken=#{encodeURIComponent(nextPageToken)}")
+						span Próxima página&nbsp;
+						i.glyphicon.glyphicon-forward

@@ -35,7 +35,7 @@
     "connect-mongo": "^1.2.0",
     "connect-mongodb-session": "^1.1.1",
     "cookie-parser": "^1.4.1",
-    "crudeasy": "^0.2.0",
+    "crudeasy": "^0.2.3",
     "express": "^4.13.4",
     "express-session": "^1.13.0",
     "googleapis": "^3.1.0",
@@ -49,7 +49,8 @@
     "passport-google-oauth": "^1.0.0",
     "passport-linkedin": "^1.0.0",
     "passport-local": "^1.0.0",
-    "passport-twitter": "^1.0.4"
+    "passport-twitter": "^1.0.4",
+    "request": "^2.72.0"
   },
   "engines": {
     "node": "~4.4.0"

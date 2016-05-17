@@ -3,51 +3,69 @@ extends ../base.jade
 
 apend scripts
   script
-    include ../../scripts/processos-form.js
 
 block content
+  if !query
+    - var query = {}
+    p= query
+  if !query.categorias
+    - var query.categorias = {}
+    - query.categorias.acomp={}
+    - query.categorias.clientes={}
+    - query.categorias.uf={}
+    - query.categorias.fase={}
+    - query.categorias.pessoas={}
+    - query.categorias.advogado={}
+    - query.categorias.adv={}
+    - query.categorias.resp={}
+    - query.categorias.natVara={}
+    - query.categorias.numVara={}
+    - query.categorias.natAcao={}
+    - query.categorias.status={}
+    - var categorias = query.categorias
+
   h3 #{action} processo
   form(method="POST")
     .form-group.row
       label.form-control-label.col-sm-2(for="numero") Número do processo:
       .col-sm-10
-        input.form-control(type="text", name="numero", id="numero", value=processo.numero)
+        input.form-control(type="text", name="numero", id="numero", value=item.numero)
     .form-group.row
       label.form-control-label.col-sm-2(for="numero") Acompanhamento:
       .col-sm-10
         select.form-control(name="acomp", id="acomp")
-          for acomp in categorias.acomps
-            if processo.acomp == acomp
-              option(selected="true") #{acomp}
+          for acomps in query.categorias.acomp
+            if item.acomp == acomps
+              option(selected="true") #{acomps}
             else
-              option #{acomp}
+              option #{acomps}
     .form-group.row
       label.form-control-label.col-sm-2(for="link") Link de acompanhamento:
       .col-sm-10
-        input.form-control(type="text", name="link", id="link", value=processo.link)
+        input.form-control(type="text", name="link", id="link", value=item.link)
     .form-group.row
       label.form-control-label.col-sm-2(for="cliente") Cliente:
       .col-sm-10
         select.form-control(name="cliente", id="cliente")
-            for cliente in categorias.clientes
-              if processo.cliente == cliente
+            for cliente in query.categorias.clientes
+              if item.cliente == cliente
                 option(selected="true") #{cliente}
               else
                 option #{cliente}
     .form-group.row
       label.form-control-label.col-sm-2(for="parteCliente") Parte cliente:
       .col-sm-10
-        input.form-control(type="text", name="parteCliente", id="parteCliente", value=processo.parteCliente)
+        input.form-control(type="text", name="parteCliente", id="parteCliente", value=item.parteCliente)
     .form-group.row
       label.form-control-label.col-sm-2(for="parteContraria") Parte contrária:
       .col-sm-10
-        input.form-control(type="text", name="parteContraria", id="parteContraria", value=processo.parteContraria)
+        input.form-control(type="text", name="parteContraria", id="parteContraria", value=item.parteContraria)
     .form-group.row
       label.form-control-label.col-sm-2(for="advogado") Advogado:
       .col-sm-2
         select.form-control(name="advogado", id="advogado", size="6", multiple="multiple")
-          for advogado in categorias.advogados
-            if processo.advogado == advogado
+          for advogado in query.categorias.advogados
+            if item.advogado == advogado
               option(selected="true") #{advogado}
             else
               option #{advogado}
@@ -57,8 +75,8 @@ block content
       label.form-control-label.col-sm-2(for="responsavel") Responsável&#58;
       .col-sm-2
         select.form-control(name="responsavel", id="responsavel", size="6", multiple="multiple")
-          for responsavel in categorias.responsaveis
-            if processo.responsavel == responsavel
+          for responsavel in query.categorias.responsaveis
+            if item.responsavel == responsavel
               option(selected="true") #{responsavel}
             else
               option #{responsavel}
@@ -70,8 +88,8 @@ block content
       label.form-control-label.col-sm-2(for="estado") Estado (UF):
       .col-sm-2
         select.form-control.col-sm-2(name="estado", id="estado")
-          for estado in categorias.estados
-            if processo.estado == estado
+          for estado in query.categorias.estados
+            if item.estado == estado
               option(selected="true") #{estado}
             else
               option #{estado}
@@ -85,8 +103,8 @@ block content
       label.form-control-label.col-sm-2(for="instancia") Instância:
       .col-sm-2
         select.form-control(name="instancia", id="instancia")
-          for instancia in categorias.instancias
-            if processo.instancia == instancia
+          for instancia in query.categorias.instancias
+            if item.instancia == instancia
               option(selected="true") #{instancia}
             else
               option #{instancia}
@@ -94,15 +112,15 @@ block content
       label.form-control-label.col-sm-2(for="numVara") Vara:
       .col-sm-2
         select.form-control(name="numVara", id="numVara")
-          for numVara in categorias.numVaras
-            if processo.numVara == numVara
+          for numVara in query.categorias.numVaras
+            if item.numVara == numVara
               option(selected="true") #{numVara}
             else
               option #{numVara}
       .col-sm-2
         select.form-control(name="natVara", id="natVara")
-          for natVara in categorias.natVaras
-            if processo.natVara == natVara
+          for natVara in query.categorias.natVaras
+            if item.natVara == natVara
               option(selected="true") #{natVara}
             else
               option #{natVara}
@@ -111,8 +129,8 @@ block content
       label.form-control-label.col-sm-2(for="fase") Fase
       .col-sm-2
         select.form-control(name="fase", id="fase")
-          for fase in categorias.fases
-            if processo.fase == fase
+          for fase in query.categorias.fases
+            if item.fase == fase
               option(selected="true") #{fase}
             else
               option #{fase}
@@ -120,15 +138,15 @@ block content
       label.form-control-label.col-sm-2(for="status") Status atual
       .col-sm-2
         select.form-control(name="status", id="status")
-          for stato in categorias.status
-            if processo.status == stato
+          for stato in query.categorias.status
+            if item.status == stato
               option(selected="true") #{stato}
             else
               option #{stato}
     .form-group.row
       label.form-control-label.col-sm-2(for="observacoes") Observações
       .col-sm-10
-        input.form-control(type="text", name="observacoes", id="observacoes", value=processo.observacoes)
+        input.form-control(type="text", name="observacoes", id="observacoes", value=item.observacoes)
     .form-group
     .col-sm-offset-2
       button.btn.btn-success.col-sm-2(type="submit") Salvar

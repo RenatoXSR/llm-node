@@ -1,7 +1,9 @@
 - // /views/clientes/list.jade
 extends ../base.jade
+
 block content
-	h3= fullName
+	h1 Clientes
+	+navegacao
 	.table-responsive
 		table.table.table-striped.table-condensed
 			thead
@@ -27,8 +29,4 @@ block content
 							a(href="#{item.emailProcessual}") &nbsp;#{item.contatoProcessual}
 	if !items.length
 		p Nenhuma pessoa encontrado.
-	if nextPageToken
-		nav
-			ul.pager
-				li
-					a(href="?pageToken=#{encodeURIComponent(nextPageToken)}") Mais
+	+navegacao

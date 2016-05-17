@@ -1,14 +1,14 @@
 extends ../base.jade
 
 block content
-  h3 Processo n.º #{processo.numero}
+  h3 Processo n.º #{item.numero}
     small
 
   .btn-group
-    a(href="/processos/#{processo.id}/editar", class='btn btn-primary btn-sm')
+    a(href="/processos/#{item.id}/editar", class='btn btn-primary btn-sm')
       i.glyphicon.glyphicon-edit
       span  Editar processo
-    a(href="/processos/#{processo.id}/excluir", class='btn btn-danger btn-sm')
+    a(href="/processos/#{item.id}/excluir", class='btn btn-danger btn-sm')
       i.glyphicon.glyphicon-trash
       span  Excluir processo
   .media
@@ -16,29 +16,25 @@ block content
       h4 Dados cadastrais
         | &nbsp;
         small 
-          | #{processo.cliente}
+          | #{item.cliente}
           | &nbsp;(
-          | #{processo.advogado}
+          | #{item.advogado}
           | /
-          | #{processo.responsavel}
+          | #{item.responsavel}
           | )
-      h5 #{processo.parteCliente||'(desconhecido)'} vs. #{processo.parteContraria||'(desconhecido)'} 
+      h5 #{item.parteCliente||'(desconhecido)'} vs. #{item.parteContraria||'(desconhecido)'} 
       p 
         | Acompanhamento&nbsp;
-        | #{processo.acomp}
+        | #{item.acomp}
         | &nbsp;/&nbsp;
-        a(href="#{processo.link}" target="_blank") Link
-      p Foro: #{processo.comarca}/#{processo.estado} (#{processo.instancia})
-      p Unidade: #{processo.numVara} #{processo.natVara}
-      p Fase/Status: #{processo.fase}/#{processo.status}
-      p Observações: #{processo.observacoes}
-  h4 Andamentos do Processo n.º #{processo.numero}
-  if !processo.andamentos
+        a(href="#{item.link}" target="_blank") Link
+      p Foro: #{item.comarca}/#{item.estado} (#{item.instancia})
+      p Unidade: #{item.numVara} #{item.natVara}
+      p Fase/Status: #{item.fase}/#{item.status}
+      p Observações: #{item.observacoes}
+  h4 Andamentos do Processo n.º #{item.numero}
+  if !item.andamentos
     p Nenhum andamento encontrado.
-    .btn-group
-      a(href="/processos/#{processo.id}/novo-andamento", class='btn btn-primary btn-sm')
-        i.glyphicon.glyphicon-plus
-        span  Novo andamento
   else
     .table-responsive
       table.table.table-striped.table-condensed(border='1')
@@ -53,7 +49,7 @@ block content
             th Modificado por, em
             th Editar/Excluir
         tbody
-          each andamento, i in processo.andamentos
+          each andamento, i in item.andamentos
               tr
                 td= i+1
                 td= andamento.data
@@ -75,8 +71,3 @@ block content
                     a(href="/processos/#{processo.id}/#{andamento.id}/excluir", class='btn btn-danger btn-sm')
                       i.glyphicon.glyphicon-trash
                       span  Excluir
-  if nextPageToken
-    nav
-      ul.pager
-        li
-          a(href="?pageToken=#{encodeURIComponent(nextPageToken)}", class="btn btn-primary btn-sm") Mais
