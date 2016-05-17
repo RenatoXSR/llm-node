@@ -4,18 +4,17 @@
 
 'use strict';
 
-var path         = require('path'),
-    express      = require('express'),
-    config       = require('./config')(),
-    mongoose     = require('mongoose'),
-    passport     = require('passport'),
-    flash        = require('connect-flash'),
-    morgan       = require('morgan'),
-    cookieParser = require('cookie-parser'),
-    bodyParser   = require('body-parser'),
-    session      = require('express-session'),
-    MongoStore   = require('connect-mongo')(session);
-
+const path         = require('path'),
+      express      = require('express'),
+      config       = require('./lib/config')(),
+      mongoose     = require('mongoose'),
+      passport     = require('passport'),
+      flash        = require('connect-flash'),
+      morgan       = require('morgan'),
+      cookieParser = require('cookie-parser'),
+      bodyParser   = require('body-parser'),
+      session      = require('express-session'),
+      MongoStore   = require('connect-mongo')(session);
 //    MongoDBStore = require('connect-mongodb-session')(session);
 
 
@@ -80,8 +79,6 @@ app.use(session({
     store: new MongoStore({ mongooseConnection: mongoose.connection })
 }));
 
-
-
 // required for passport
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
@@ -90,8 +87,6 @@ app.use(flash()); // use connect-flash for flash messages stored in session
 
 //==============================
 // Resume normal app routines
-
-
 app.disable('etag');
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -99,112 +94,52 @@ app.set('trust proxy', true);
 //app.configure('development', function () { app.locals.pretty = true; });
 
 
-//=========================
-//  START
+//=============================
+//  LOAD Crudeasy Modules (Crud and Api routes)
+//  See crudeasy's documentation
+require('./lib/crudeasy-modules.js')(config, app);
 
-// Calls the Module 3 times, for routes and collections Movies and Actors.
-var crudEasy = require('crudeasy');
-var isLoggedIn = function isLoggedIn(req, res, next) {
-		// if user is authenticated in the session, carry on 
-		if (req.isAuthenticated())
-			return next();
-		// if they aren't redirect them to the home page
-		//res.render('login');
-		res.redirect('/?redir='+encodeURIComponent(req.baseUrl));
-	};
+// // ============================
+// // Example loading of a crudeasy module would be as follows:
+// 
+// const crudEasy = require('crudeasy');
+// const isLoggedIn = function isLoggedIn(req, res, next) {
+//		// if user is authenticated in the session, carry on 
+//		if (req.isAuthenticated())
+//			return next();
+//		// if they aren't redirect them to the home page
+//		res.render('login');
+// };
+// var tableConfig = {
+//    url: config.mongodb.url,
+//    collection:     "table",
+//    defaultPerPage: 10,
+//    routeNew:       "/new",
+//    routeDelete:    "/:item/delete",
+//    routeEdit:      "/:item/edit",
+//    labelNew:       "New",
+//    labelEdit:      "Edit",
+//    viewNew:        "table/form.jade", 
+//    viewItem:       "table/view.jade",
+//    viewList:       "table/list.jade",
+//    viewEdit:       "table/form.jade",
+//    middle:         [isLoggedIn]
+//	};
+// // mongodb url and collection name:
+// var tableInstance = crudEasy.newModel(config.mongodb.url, 'table'); 
+// app.use('/table', crudEasy.crudRoute(tableInstance, tableConfig));
+// app.use('/api/table', crudEasy.apiRoute(tableInstance, tableConfig));
+// // [END] Example
 
-
-//  END
-//===========================
-
-// Processos ================
-var configProcessos = {
-    url: config.mongodb.url,
-    collection:     "processos",
-    defaultPerPage: 10,
-    routeNew:       "/novo",
-    routeDelete:    "/:item/excluir",
-    routeEdit:      "/:item/editar",
-    labelNew:       "Novo",
-    labelEdit:      "Editar",
-    viewNew:        "processos/form.jade", 
-    viewItem:       "processos/view.jade",
-    viewList:       "processos/list.jade",
-    viewEdit:       "processos/form.jade",
-	middle:			isLoggedIn
-	};
-var instProcessos = crudEasy.newModel(config.mongodb.url, 'processos');
-app.use('/processos', crudEasy.crudRoute(instProcessos,configProcessos));
-app.use('/api/processos', crudEasy.apiRoute(instProcessos,configProcessos));
-
-// Pessoas ================
-var configPessoas = {
-    url: 			config.mongodb.url,
-    collection:     "pessoas",
-    defaultPerPage: 10,
-    routeNew:       "/novo",
-    routeDelete:    "/:item/excluir",
-    routeEdit:      "/:item/editar",
-    labelNew:       "Novo",
-    labelEdit:      "Editar",
-    viewNew:        "pessoas/form.jade", 
-    viewItem:       "pessoas/view.jade",
-    viewList:       "pessoas/list.jade",
-    viewEdit:       "pessoas/form.jade",
-	middle:			isLoggedIn
-	};
-var instPessoas = crudEasy.newModel(config.mongodb.url, 'pessoas');
-app.use('/pessoas', crudEasy.crudRoute(instPessoas,configPessoas));
-app.use('/api/pessoas', crudEasy.apiRoute(instPessoas,configPessoas));
-
-// Clientes ================
-var configClientes = {
-    url: 			config.mongodb.url,
-    collection:     "clientes",
-    defaultPerPage: 10,
-    routeNew:       "/novo",
-    routeDelete:    "/:item/excluir",
-    routeEdit:      "/:item/editar",
-    labelNew:       "Novo",
-    labelEdit:      "Editar",
-    viewNew:        "clientes/form.jade", 
-    viewItem:       "clientes/view.jade",
-    viewList:       "clientes/list.jade",
-    viewEdit:       "clientes/form.jade",
-	middle:			isLoggedIn
-	};
-var instClientes = crudEasy.newModel(config.mongodb.url, 'clientes');
-app.use('/clientes', crudEasy.crudRoute(instClientes,configClientes));
-app.use('/api/clientes', crudEasy.apiRoute(instClientes,configClientes));
-
-
-// Categorias ================
-var configCategorias = {
-    url: 			config.mongodb.url,
-    collection:     "categorias",
-    defaultPerPage: 1000,
-    routeNew:       "/novo",
-    routeDelete:    "/:item/excluir",
-    routeEdit:      "/:item/editar",
-    labelNew:       "Nova",
-    labelEdit:      "Editar",
-    viewNew:        "categorias/form.jade", 
-    viewItem:       "categorias/view.jade",
-    viewList:       "categorias/list.jade",
-    viewEdit:       "categorias/form.jade",
-	middle:			isLoggedIn
-	};
-var instCategorias = crudEasy.newModel(config.mongodb.url, 'categorias');
-app.use('/categorias', crudEasy.crudRoute(instCategorias,configCategorias));
-app.use('/api/categorias', crudEasy.apiRoute(instCategorias,configCategorias));
-
-// Páginas estáticas ================
+//=============================
+// Static routes 
 app.use(express.static('public'));
 
 
-// routes ================================================
-require('./routes.js')(app, passport);
+//=============================
+// Login and oauth routes for passport
 // load our routes and pass in our app and fully configured passport
+require('./lib/routes.js')(app, passport);
 
 
 // Basic 404 handler

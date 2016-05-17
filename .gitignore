@@ -9,6 +9,7 @@ gitkit-server-config.json
 .mongorc.js
 old_files
 old_files/*
+lib/crudeasy-modules.js
 
 
 #########

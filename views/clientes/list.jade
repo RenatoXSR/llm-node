@@ -20,9 +20,11 @@ block content
 						td #{item.num}&nbsp;(#{item.numLegado})
 						td= item.fullName
 						td
-							a(href='mailto:#{item.emailFinanceiro}') #{item.tratamento}&nbsp;#{item.contatoFinanceiro}
+							| #{item.tratamento}&nbsp;
+							a(href='mailto:#{item.emailFinanceiro}') #{item.contatoFinanceiro}
 						td
-							a(href="#{item.emailProcessual}") #{item.tratamentoProcessual}&nbsp;#{item.contatoProcessual}
+							| #{item.tratamentoProcessual}
+							a(href="#{item.emailProcessual}") &nbsp;#{item.contatoProcessual}
 	if !items.length
 		p Nenhuma pessoa encontrado.
 	if nextPageToken
