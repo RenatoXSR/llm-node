@@ -158,7 +158,7 @@ app.use(function (err, req, res, next) {
 
 if (module === require.main) {
   // Start the server
-  var server = app.listen(config.port, function () {
+  var server = app.listen(config.port, config.serverIp, function () {
     var host = server.address().address;
     var port = server.address().port;
 
