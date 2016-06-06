@@ -29,7 +29,7 @@
   },
   "homepage": "https://github.com/RenatoXSR/llm-node#readme",
   "dependencies": {
-    "bcrypt-nodejs": "0.0.3",
+    "bcrypt": "^0.8.6",
     "body-parser": "^1.15.0",
     "connect-flash": "^0.1.1",
     "connect-mongo": "^1.2.0",
