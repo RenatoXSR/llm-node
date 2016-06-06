@@ -32,7 +32,7 @@ require('./lib/passport')(passport); // pass passport for configuration
 var app = express();
 
 // set up our express application
-app.use(morgan('dev')); // log every request to the console
+app.use(morgan('combined')); // log every request to the console //dev
 app.use(cookieParser()); // read cookies (needed for auth)
 app.use(bodyParser.json()); // get information from html forms
 app.use(bodyParser.urlencoded({extended: false})); // get information from html forms
@@ -156,7 +156,7 @@ app.use(function (err, req, res, next) {
   res.status(500).send(err.response || 'Something broke!');
 });
 
-if (module === require.main) {
+//if (module === require.main) {
   // Start the server
   var server = app.listen(config.port, config.hostname, function () {
     var host = server.address().address;
@@ -164,6 +164,6 @@ if (module === require.main) {
 
     console.log('App listening at http://%s:%s', host, port);
   });
-}
+//}
 
 module.exports = app;
