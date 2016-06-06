@@ -2,10 +2,10 @@
   "name": "llm-node",
   "version": "1.1.6",
   "description": "Legal Lawyer Manager (LLM)",
-  "main": "server.js",
+  "main": "start.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node --use_strict start.js"
   },
   "repository": {
     "type": "git",
