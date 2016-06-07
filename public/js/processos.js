@@ -18,7 +18,7 @@
     })(window.location.search.substr(1).split('&'))
 })(jQuery);
 
-function popularFiltro(loadUrl, id){
+function popularFiltroOld(loadUrl, id){
 	$.getJSON({
 		url: loadUrl,
 		success: function(data){
@@ -65,13 +65,35 @@ function carregarFiltros(){
 		["l=100&sk=0&f={alias:1,_id:1}}&s={alias:1}}&q={}","#cliente"],
 		['l=100&sk=0&f={fullName:1,_id:1}}&s={fullName:1}}&q={eParteClienteLegado:"S"}',"#parteCliente"],
 		['l=100&sk=0&f={fullName:1,_id:1}}&s={fullName:1}}&q={eParteContrariaLegado:"S"}',"#parteContraria"]];*/
-	$.each(tipos,function(i,obj){
+/*	$.each(tipos,function(i,obj){
 		popularFiltroCategoria(obj[0], obj[1])
 		});
 	$.each(pessoas,function(i,obj){
 		popularFiltro(obj[0], obj[1])
 		});
+	*/
+
+	$.getJSON({
+		url: "/api/categorias",
+		success: function(data){
+			for each (tipo in tipos) {
+				$( tipo[1] ).empty(); //verificar se dá problema...
+				if (data.items==null) {
+					$(tipo[1]).append('<option value="null" disabled>Nenhum filtro encontrado.<option>');
+					return;
+				}
+				$(tipo[1]).append('<option value="null" disabled>Selecione uma opção:</option>');
+				for each (item in data.items) {
+					if (item.tipo == tipo[0]) {
+						$( tipo[1] ).append( '<option value="' + item.id + '">' + item.alias + ' ' + item.fullName + '</option>');
+					}
+				};
+			}
+			
+		});
 	}
+
+}
 
 /*
  *
