@@ -32,7 +32,9 @@ require('./lib/passport')(passport); // pass passport for configuration
 var app = express();
 
 // set up our express application
-app.use(morgan('combined')); // log every request to the console //dev
+app.use(morgan('combined', {
+      skip: function (req, res) { if (process.env.NODE_ENV=='production') { return req.connection.remoteAddress == config.hostname } }
+})); // log every request to the console //dev
 app.use(cookieParser()); // read cookies (needed for auth)
 app.use(bodyParser.json()); // get information from html forms
 app.use(bodyParser.urlencoded({extended: false})); // get information from html forms
@@ -74,7 +76,7 @@ app.use(session({
     cookie: {
         maxAge: 1000 * 60 * 60 * 24 * 7 // 1 week 
     },
-    saveUninitialized: true,
+    saveUninitialized: false,
     resave: true,
     store: new MongoStore({ mongooseConnection: mongoose.connection })
 }));

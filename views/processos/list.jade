@@ -23,7 +23,7 @@ block content
 				a(href="?perPage=1000") 1000
 	+navegacao()
 	.collapse.well#wellFiltros
-		form#filtro
+		form#filtro(method="GET")
 			.form-group.row
 				label.form-control-label.col-sm-2(for="numero") Número do processo:
 				.col-sm-10
@@ -106,7 +106,7 @@ block content
 					input.form-control(type="text", name="observacoes", id="observacoes",disabled="disabled", placeholder="Carregando filtros...")
 			.form-group
 				.col-sm-offset-2
-					button.btn.btn-success.col-sm-2(disabled="disabled") Filtrar!
+					button.btn.btn-success.col-sm-2#filtrar Filtrar!
 			br
 	.table-responsive
 		table.table.table-striped.table-condensed(border='1')
