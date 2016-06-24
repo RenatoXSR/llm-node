@@ -141,8 +141,9 @@ app.use(express.static('public'));
 //=============================
 // Login and oauth routes for passport
 // load our routes and pass in our app and fully configured passport
-require('./lib/routes.js')(app, passport);
+require('./lib/passport-routes.js')(app, passport);
 
+//require('./lib/api-routes.js')(config,app);
 
 // Basic 404 handler
 app.use(function (req, res) {
