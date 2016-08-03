@@ -85,7 +85,16 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session
-
+app.use(function(req, res, next){
+  res.locals.user = req.user;
+  if (req.user!== undefined) {
+    res.locals.authenticated = ! req.user.anonymous;
+  } else {
+    res.locals.authenticated = false;
+  }
+  res.locals.query = req.query;
+  next();
+});
 
 //==============================
 // Resume normal app routines
@@ -94,7 +103,9 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 app.set('trust proxy', true);
 //app.configure('development', function () { app.locals.pretty = true; });
-
+if (app.get('env') === 'development') {
+  app.locals.pretty = true;
+}
 
 //=============================
 //  LOAD Crudeasy Modules (Crud and Api routes)

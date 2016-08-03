@@ -38,6 +38,7 @@ html(lang="pt-br", ng-app="ngLLM")
 								li
 									a(href="/perfil")
 										span.glyphicon.glyphicon-home
+							if user
 								if user.perm.pro
 									li
 										a(href="/processos")

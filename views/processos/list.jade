@@ -51,25 +51,30 @@ block content
 				.col-sm-10
 					input.form-control(type="text", name="parteContraria", id="parteContraria", disabled="disabled", placeholder="Carregando filtros...")
 			.form-group.row
-				label.form-control-label.col-sm-2(for="advogado") Advogado:
+				label.form-control-label.col-sm-2(for="adv") Advogado:
 				.col-sm-2
-					select.form-control(name="advogado", id="advogado", size="6", multiple="multiple")
+					select.form-control(name="adv", id="adv", size="6", multiple="multiple")
 						option(disabled="disabled") Carregando filtros...
 				.col-sm-2
 					p.form-control-text (Seleção múltipla. Segura ctrl ou command para selecionar mais de um)
 			.form-group.row
-				label.form-control-label.col-sm-2(for="responsavel") Responsável&#58;
+				label.form-control-label.col-sm-2(for="resp") Responsável&#58;
 				.col-sm-2
-					select.form-control(name="responsavel", id="responsavel", size="6", multiple="multiple")
+					select.form-control(name="resp", id="resp", size="6", multiple="multiple")
 						option(disabled="disabled") Carregando filtros...
 				.col-sm-2
 					p.form-control-text (Seleção múltipla. Segura ctrl ou command para selecionar mais de um)
+			.form-group.row
+				label.form-control-label.col-sm-2(for="natAcao") Natureza da Ação:
+				.col-sm-2
+					select.form-control(name="natAcao",id="natAcao")
+						option(disabled="disabled") Carregando filtros...
 			hr
 			.form-group.row
 				h3 Escolha Estado (UF), Instância, Comarca e Vara (nessa ordem):
-				label.form-control-label.col-sm-2(for="estado") Estado (UF):
+				label.form-control-label.col-sm-2(for="uf") Estado (UF):
 				.col-sm-2
-					select.form-control.col-sm-2(name="estado", id="estado")
+					select.form-control.col-sm-2(name="uf", id="uf")
 						option(disabled="disabled") Carregando filtros...
 			.form-group.row
 				label.form-control-label.col-sm-2(for="comarca") Comarca:
@@ -170,5 +175,5 @@ block content
 	+navegacao
 
 append footer-jquery
-	| carregarTabela();
+		// | carregarTabela();
 	| carregarFiltros();

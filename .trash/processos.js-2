@@ -24,15 +24,14 @@ function carregarFiltros(){
 		url: "/api/clientes?perPage=10000",
 		success: function(data){
 			const id = "#cliente"; 
-			//$(id).empty();
+			$(id).empty();
 			if (data.items==null) {
 				$(id).append('<option value="null">Nenhum filtro encontrado.<option>');
 				return;
 			}
 			$(id).append('<option value="null">Selecione uma opção:</option>');
 			data.items.forEach(function(item,index,arr){
-				// na linha abaixo, substituir o primeiro .alias por .id
-				$(id).append( '<option value="' + item.alias + '">' + item.num + '&nbsp;&mdash;&nbsp;' + item.alias + ' &nbsp; (' + item.fullName + ')</option>'); 
+				$(id).append( '<option value="' + item.id + '">' + item.num + '&nbsp;&mdash;&nbsp;' + item.alias + ' &nbsp; (' + item.fullName + ')</option>');
 			});
 
 		}});
@@ -40,8 +39,8 @@ function carregarFiltros(){
 	$.getJSON({
 		url: "/api/pessoas?perPage=10000",
 		success: function(data){
-			//$('#parteCliente').empty();
-			//$('#parteContraria').empty();
+			$('#parteCliente').empty();
+			$('#parteContraria').empty();
 			if (data.items==null) {
 				$('#parteCliente').append('<option value="null" disabled>Nenhum filtro encontrado.<option>');
 				$('#parteContraria').append('<option value="null" disabled>Nenhum filtro encontrado.<option>');
@@ -50,13 +49,11 @@ function carregarFiltros(){
 			$('#parteCliente').append('<option value="null" disabled>Selecione uma opção:</option>');
 			$('#parteContraria').append('<option value="null" disabled>Selecione uma opção:</option>');
 			data.items.forEach(function(item,index,arr){
-				if (item.eParteClienteLegado == 'S' || item.eParteCliente == true) {
-				// na linha abaixo, substituir o primeiro .alias por .id
-					$('#parteCliente').append( '<option value="' + item.alias + '">' + item.fullName + '</option>');
+				if (item.eParteCliente=='S') {
+					$('#parteCliente').append( '<option value="' + item.id + '">' + item.fullName + ')</option>');
 				}
-				if (item.eParteContrariaLegado == 'S' || item.eParteContraria == true) {
-				// na linha abaixo, substituir o primeiro .alias por .id
-					$('#parteContraria').append( '<option value="' + item.alias + '">' + item.fullName + '</option>');
+				if (item.eParteContraria=='S') {
+					$('#parteContraria').append( '<option value="' + item.id + '">' + item.fullName + ')</option>');
 				}
 			});
 
@@ -66,20 +63,30 @@ function carregarFiltros(){
 		url: "/api/categorias",
 		success: function(data){
 			//console.log(JSON.stringify(data));
-			var filtros = [];
-			for (var h = 0; h < data.items.length; h++ ) {	
-				if (filtros[data.items[h]['tipo']]===undefined){
-					//console.log("Filtro "+ data.items[h]['tipo'] +" ainda não definido. Vamos definir agora.");
-					filtros[data.items[h]['tipo']]=[];
+			var filtros = {};
+			data.items.forEach(function(item,index,array){
+				if (filtros[item.tipo]===undefined){
+					console.log("Filtro "+ item.tipo +" ainda não definido. Vamos definir agora.");
+					filtros[item.tipo]=[{}];
 					//console.log(filtros[item.tipo].length);
-					//$('#'+data.items[h]['tipo']).empty();
-					$('#'+data.items[h]['tipo']).append('<option value="null">Selecione uma opção:</option>');
+					$('#'+item.tipo).empty();
+					$('#'+item.tipo).append('<option value="null">Selecione uma opção:</option>');
 				}
-			//	console.log(JSON.stringify(data.items[h]));
-			//	//filtros[data.items[h]['tipo'].push(item);
-				// na linha abaixo, substituir o primeiro .alias por .id
-				$('#'+data.items[h]['tipo']).append('<option value="' + data.items[h].alias + '">' + data.items[h].alias + ' ' + data.items[h].fullName + '</option>');
+				console.log(JSON.stringify(item));
+				filtros[item.tipo].push(item);
+			});
+			for (filtro in filtros){
+				console.log("O filtro '" + filtro + "' contém " + filtro.length + " filhotes.");
+				//console.log(JSON.stringify("Listando " + filtro + ": " + filtro.alias + " - " + filtro.id + " EOF"));
+				//for (filtroItem in filtro) {
+				//filtro.forEach(function(filtroItem,index,arr) {
+				for (var j = 0; j < filtro.length; j++) { 
+					console.log('Loop filtroItem in filtro in filtros: ' + JSON.stringify(filtro[j]));
+					$('#'+filtro[j].tipo).append( '<option value="' + filtro[j].id + '">' + filtro[j].alias + ' ' + filtro[j].fullName + '</option>');
+				//});
+				}
 			}
+
 			
 		}
 	});
@@ -160,6 +167,6 @@ function carregarTabela() {
 		});
 	}
 //$( ":checkbox, :radio" ).click( carregarTabela );
-//$( "select" ).change( carregarTabela );
+$( "select" ).change( carregarTabela );
 
 
