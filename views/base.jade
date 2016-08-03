@@ -38,26 +38,31 @@ html(lang="pt-br", ng-app="ngLLM")
 								li
 									a(href="/perfil")
 										span.glyphicon.glyphicon-home
-								li
-									a(href="/processos")
-										span.glyphicon.glyphicon-th-list
-										| &nbsp;Processos
-								li
-									a(href="/clientes")
-										span.glyphicon.glyphicon-briefcase
-										| &nbsp;Clientes
-								li
-									a(href="/pessoas")
-										span.glyphicon.glyphicon-pencil
-										| &nbsp;Pessoas
-								li
-									a(href="/usuarios")
-										span.fa.fa-users
-										| &nbsp;Usuários
-								li
-									a(href="/categorias")
-										span.glyphicon.glyphicon-cog
-										| &nbsp;Categorias
+								if user.perm.pro
+									li
+										a(href="/processos")
+											span.glyphicon.glyphicon-th-list
+											| &nbsp;Processos
+								if user.perm.cli
+									li
+										a(href="/clientes")
+											span.glyphicon.glyphicon-briefcase
+											| &nbsp;Clientes
+								if user.perm.pte
+									li
+										a(href="/pessoas")
+											span.glyphicon.glyphicon-pencil
+											| &nbsp;Pessoas
+								if user.perm.basic
+									li
+										a(href="/usuarios")
+											span.fa.fa-users
+											| &nbsp;Usuários
+								if user.perm.mod
+									li
+										a(href="/categorias")
+											span.glyphicon.glyphicon-cog
+											| &nbsp;Categorias
 		main
 			#wrap(style="min-height: 100%;height: auto !important;height: 100%;margin: 0 auto 60px;}")
 				.container#wrap
