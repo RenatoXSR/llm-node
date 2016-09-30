@@ -6,7 +6,8 @@
 
 const path         = require('path'),
       express      = require('express'),
-      config       = require('./lib/config')(),
+//      config       = require('./lib/config')(),
+      config       = require('./config_private.js')(),
       mongoose     = require('mongoose'),
       passport     = require('passport'),
       flash        = require('connect-flash'),
